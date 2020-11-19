@@ -36,13 +36,17 @@
 (defn end-game [] (println "Thank you for playing the guessing game. Please play again later."))
 (defn print-usage [] (println "Please choose either option 1 or option 2"))
 
+(defn process-choice [choice]
+
+  (cond
+    (= choice 1) (start-game (rand-int 100))
+    (= choice 2) (end-game)
+    :else (print-usage)))
+
 (defn command-loop []
   (loop [choice (get-number-from-cmd-line)]
 
-    (cond
-      (= choice 1) (start-game (rand-int 100))
-      (= choice 2) (end-game)
-      :else (print-usage))
+    (process-choice choice)
 
     (if (= choice 2)
       nil
